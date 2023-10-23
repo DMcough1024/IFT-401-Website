@@ -34,6 +34,7 @@
                 echo "<tr><td>" . $row['serial_num'] . "</td><td>" . $row['model_name'] . "</td><td>" . $row['nickname'] . "</td><td>" . $row_inner['logged_temp'] . "</td><td>" . $row_inner['logged_at'] . "</td></tr>";
             }
             echo "</table>";
+            echo "<br>" . $result_inner['logged_temp'] . " " . $result_inner['logged_at'];
         } else {
             echo "0 results";
         }
