@@ -27,10 +27,12 @@
         if ($result->num_rows > 0) {
             // Create an array for the device ID's
             $device_ids = array();
+            $device_names = array();
             echo "<table border='1'>";
             echo "<tr><th>Device ID</th><th>Device Type</th><th>Device Name</th></tr>";
             while($row = $result->fetch_assoc()) {
                 array_push($device_ids, $row['serial_num']);
+                array_push($device_names, $row['nickname']);
                 echo "<tr><td>" . $row['serial_num'] . "</td><td>" . $row['model_name'] . "</td><td>" . $row['nickname'] . "</td></tr>";
             }
             echo "</table>";
@@ -39,8 +41,17 @@
             echo "0 results";
         }
         echo "<br><br>";
-        // Echo all the device ID's
-        print_r($device_ids);
-        // $sql_inner = "SELECT * FROM logs WHERE device_id=" . $row['serial_num'] . " ORDER BY logged_at DESC LIMIT 1";
+        // For each device, get the last logged temperature
+        foreach ($device_ids as $device_id) {
+            $sql_inner = "SELECT * FROM logs WHERE device_id=" . $device_id . " ORDER BY logged_at DESC LIMIT 1";
+            $result_inner = $conn->query($sql_inner);
+            if ($result_inner->num_rows > 0) {
+                while($row_inner = $result_inner->fetch_assoc()) {
+                    echo $device_names[$device_id] . " " . $row_inner['logged_temp'] . " " . $row_inner['logged_at'] . "<br>";
+                }
+            } else {
+                echo "0 results";
+            }
+        }
     ?>
 </body>
