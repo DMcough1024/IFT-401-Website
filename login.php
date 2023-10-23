@@ -29,6 +29,7 @@ if ($result->num_rows == 1) {
         $_SESSION['user_name'] = $row['user_name'];
         $_SESSION['user_db'] = $row['database'];
         $_SESSION['user_perm'] = $row['permission'];
+        $_SESSION['client_id'] = $row['client_id'];
         // Redirect to the home page
         header("Location: home.php");
         $conn->close();
