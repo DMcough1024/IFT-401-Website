@@ -25,8 +25,10 @@ if ($result->num_rows == 1) {
         $_SESSION['user_name'] = $row['user_name'];
         // Redirect to the home page
         header("Location: home.php");
-    } else {
+     } else {
         echo "<br> Password is incorrect";
+        echo "<a href='index.php'>Go back to the login page</a>";
+        echo "<a href='register.php'>Register a new user</a>";
     }
 }
 else {
