@@ -7,7 +7,12 @@ $username = $_SESSION['user_name'];
 <head>
     <title>Home</title>
 </head>
-<body>
-    <h1>Welcome <?php echo $username; ?></h1>
+<header>
+    <h2>Welcome <?php echo $username; ?></h2>
     <a href="logout.php">Logout</a>
+</header>
+<body>
+    <?php
+        echo "<br> Database: " . $_SESSION['user_db'];
+    ?>
 </body>
