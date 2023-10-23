@@ -3,10 +3,10 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 // Establishing Database connection 
 $host = "192.168.1.23:3306";
-$username = "dmyerscough";
-$password = "password";
+$dbun = "dmyerscough";
+$dbpw = "password";
 $dbname = "app_users";
-$conn = new mysqli($host, $username, $password, $dbname);
+$conn = new mysqli($host, $dbun, $dbpw, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
