@@ -25,18 +25,22 @@
         $sql = "SELECT * FROM devices";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
+            // Create an array for the device ID's
+            $device_ids = array();
             echo "<table border='1'>";
-            echo "<tr><th>Device ID</th><th>Device Type</th><th>Device Name</th><th>Last Temperature</th><th>Last Log</th></tr>";
+            echo "<tr><th>Device ID</th><th>Device Type</th><th>Device Name</th></tr>";
             while($row = $result->fetch_assoc()) {
-                $sql_inner = "SELECT * FROM logs WHERE device_id=" . $row['serial_num'] . " ORDER BY logged_at DESC LIMIT 1";
-                $result_inner = $conn->query($sql_inner);
-                $row_inner = $result_inner->fetch_assoc();
-                echo "<tr><td>" . $row['serial_num'] . "</td><td>" . $row['model_name'] . "</td><td>" . $row['nickname'] . "</td><td>" . $row_inner['logged_temp'] . "</td><td>" . $row_inner['logged_at'] . "</td></tr>";
+                array_push($device_ids, $row['serial_num']);
+                echo "<tr><td>" . $row['serial_num'] . "</td><td>" . $row['model_name'] . "</td><td>" . $row['nickname'] . "</td></tr>";
             }
             echo "</table>";
             echo "<br>" . $result_inner['logged_temp'] . " " . $result_inner['logged_at'];
         } else {
             echo "0 results";
         }
+        echo "<br><br>";
+        // Echo all the device ID's
+        print_r($device_ids);
+        // $sql_inner = "SELECT * FROM logs WHERE device_id=" . $row['serial_num'] . " ORDER BY logged_at DESC LIMIT 1";
     ?>
 </body>
