@@ -36,24 +36,34 @@
                 echo "<tr><td>" . $row['serial_num'] . "</td><td>" . $row['model_name'] . "</td><td>" . $row['nickname'] . "</td></tr>";
             }
             echo "</table>";
-            echo "<br>" . $result_inner['logged_temp'] . " " . $result_inner['logged_at'];
         } else {
             echo "0 results";
         }
         echo "<br>";
-        // For each device, get the last logged temperature
-        $i = 0;
-        foreach ($device_ids as $device_id) {
+    ?>
+    <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $device_id = $_POST['device_id'];
             $sql_inner = "SELECT * FROM logs WHERE device_id='" . $device_id . "' ORDER BY logged_at DESC LIMIT 1";
             $result_inner = $conn->query($sql_inner);
             if ($result_inner->num_rows > 0) {
                 while($row_inner = $result_inner->fetch_assoc()) {
-                    echo $device_names[$i] . " " . $row_inner['logged_temp'] . " " . $row_inner['logged_at'] . "<br>";
-                    $i++;
+                    echo $device_names[array_search($device_id, $device_ids)] . " " . $row_inner['logged_temp'] . " " . $row_inner['logged_at'] . "<br>";
                 }
             } else {
                 echo "0 results";
             }
         }
     ?>
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+        <label for="device_id">Device ID:</label>
+        <select name="device_id" id="device_id">
+            <?php
+                foreach ($device_ids as $device_id) {
+                    echo "<option value='" . $device_id . "'>" . $device_names[array_search($device_id, $device_ids)] . "</option>";
+                }
+            ?>
+        </select>
+        <input type="submit" name="submit" value="Get Last Logged Temperature">
+    </form>
 </body>

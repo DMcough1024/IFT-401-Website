@@ -21,6 +21,7 @@ if ($result->num_rows == 1) {
     $row = $result->fetch_assoc();
     if ($row['user_password'] === $password) {
         echo "<br> Password is correct";
+        // if $password === 'password' redirect to a change password page
         // Start a session
         session_start();
         $_SESSION['user_id'] = $row['user_id'];
