@@ -41,7 +41,7 @@ if ($result->num_rows == 1) {
 }
 else {
     echo "<br> User not found in the database";
-    echo "<br><a href='register.html'>Register a new user</a>";
+    echo "<br><a href='register.php'>Register a new user</a>";
     $conn->close();
 }
 ?>
