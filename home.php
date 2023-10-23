@@ -26,9 +26,12 @@
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             echo "<table border='1'>";
-            echo "<tr><th>Device ID</th><th>Device Name</th><th>Device Type</th><th>Device Status</th></tr>";
+            echo "<tr><th>Device ID</th><th>Device Type</th><th>Device Name</th><th>Last Temperature</th><th>Last Log</th></tr>";
             while($row = $result->fetch_assoc()) {
-                echo "<tr><td>" . $row['serial_num'] . "</td><td>" . $row['model_name'] . "</td><td>" . $row['nickname'] . "</td><td>" . $row['max_temp'] . "</td></tr>";
+                $sql = "SELECT * FROM logs WHERE device_id=" . $row['serial_num'] . " ORDER BY logged_at DESC LIMIT 1";
+                $result2 = $conn->query($sql);
+                $row2 = $result2->fetch_assoc();
+                echo "<tr><td>" . $row['serial_num'] . "</td><td>" . $row['model_name'] . "</td><td>" . $row['nickname'] . "</td><td>" . $row2['logged_temp'] . "</td></tr>" . $row2['logged_at'] . "</td></tr>";
             }
             echo "</table>";
         } else {
