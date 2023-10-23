@@ -18,6 +18,7 @@
 </head>
 <header>
     <h2>Welcome <?php echo $username; ?></h2>
+    <h2>Logged in as: <?php echo $_SESSION['user_perm']; ?></h2>
     <a href="logout.php">Logout</a>
 </header>
 <body>

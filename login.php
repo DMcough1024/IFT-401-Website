@@ -28,7 +28,7 @@ if ($result->num_rows == 1) {
         $_SESSION['user_email'] = $row['user_email'];
         $_SESSION['user_name'] = $row['user_name'];
         $_SESSION['user_db'] = $row['database'];
-        echo "<br> Session variables are set";
+        $_SESSION['user_perm'] = $row['permission'];
         // Redirect to the home page
         header("Location: home.php");
         $conn->close();
