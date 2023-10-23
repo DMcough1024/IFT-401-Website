@@ -23,8 +23,11 @@ if ($result->num_rows == 1) {
         $_SESSION['user_id'] = $row['user_id'];
         $_SESSION['user_email'] = $row['user_email'];
         $_SESSION['user_name'] = $row['user_name'];
+        echo "<br> Session variables are set";
+        echo "<br> Password Entered: $password";
+        echo "<br> Password in the database: " . $row['user_password'];
         // Redirect to the home page
-        header("Location: home.php");
+        // header("Location: home.php");
      } else {
         echo "<br> Password is incorrect";
         echo "<a href='index.php'>Go back to the login page</a>";
