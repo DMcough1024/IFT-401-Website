@@ -42,13 +42,14 @@
         }
         echo "<br>";
         // For each device, get the last logged temperature
+        $i = 0;
         foreach ($device_ids as $device_id) {
-            echo $device_id . "<br>";
             $sql_inner = "SELECT * FROM logs WHERE device_id='" . $device_id . "' ORDER BY logged_at DESC LIMIT 1";
             $result_inner = $conn->query($sql_inner);
             if ($result_inner->num_rows > 0) {
                 while($row_inner = $result_inner->fetch_assoc()) {
-                    echo $device_names[$device_id] . " " . $row_inner['logged_temp'] . " " . $row_inner['logged_at'] . "<br>";
+                    echo $device_names[$i] . " " . $row_inner['logged_temp'] . " " . $row_inner['logged_at'] . "<br>";
+                    $i++;
                 }
             } else {
                 echo "0 results";
