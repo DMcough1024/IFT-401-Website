@@ -75,9 +75,9 @@
         if ($result->num_rows > 0) {
             echo "<h3>List of Users with Client ID " . $client_id . "</h3>";
             echo "<table border='1'>";
-            echo "<tr><th>User ID</th><th>Username</th><th>Permission Level</th></tr>";
+            echo "<tr><th>User Email</th><th>User Name</th></tr>";
             while($row = $result->fetch_assoc()) {
-                echo "<tr><td>" . $row['user_id'] . "</td><td>" . $row['username'] . "</td><td>" . $row['permission_level'] . "</td></tr>";
+                echo "<tr><td>" . $row['user_email'] . "</td><td>" . $row['user_name'] . "</td></tr>";
             }
             echo "</table>";
         } else {
