@@ -68,11 +68,9 @@
         <input type="submit" name="submit" value="Get Last Logged Temperature">
     </form>
     <?php
-    echo $_SESSION['user_perm'];
     if ($_SESSION['user_perm'] === 'admin') {
         echo "<br>Hello Admin";
         $client_id = $_SESSION['client_id'];
-        echo "<br>Client ID: " . $client_id;
         $sql = "SELECT * FROM app_users.users WHERE client_id='" . $client_id . "'";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
